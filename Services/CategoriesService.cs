@@ -8,13 +8,13 @@ public class CategoriesService : ICategoriesService
     {
         _context = context;
     }
-
+    
     public IEnumerable<SelectListItem> GetSelectList()
     {
         return _context.Categories
+                .AsNoTracking()
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
                 .OrderBy(c => c.Text)
-                .AsNoTracking()
                 .ToList();
     }
 }
